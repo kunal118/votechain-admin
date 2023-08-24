@@ -1,10 +1,29 @@
 import { useState, useEffect, useRef } from "react";
 import reactLogo from "./assets/react.svg";
 import Navbar from "./components/Navbar";
-import Welcome from "./components/Welcome";
+import Welcome from "./components/PartyRegister";
 import toast, { Toaster } from "react-hot-toast";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { ProviderContext, SignerContext } from "./context/signerContext";
+import VoterRegister from "./components/VoterRegister";
+import * as ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import PartyRegister from "./components/PartyRegister";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello world!</div>,
+  },
+  {
+    path: "/registerParty",
+    element: <PartyRegister></PartyRegister>,
+  },
+  {
+    path: "/registerVoter",
+    element: <VoterRegister></VoterRegister>,
+  },
+]);
 
 function App() {
   const didMount = useRef(false);
@@ -42,7 +61,9 @@ function App() {
       <SignerContext.Provider value={signerObject}>
         <ProviderContext.Provider>
           <Navbar />
-          <Welcome></Welcome>
+          {/* <Welcome></Welcome> */}
+          {/* <VoterRegister></VoterRegister> */}
+          <RouterProvider router={router} />
         </ProviderContext.Provider>
       </SignerContext.Provider>
     </>
